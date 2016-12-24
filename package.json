@@ -1,0 +1,17 @@
+{
+  "name": "babel-plugin-isotropy-rpc",
+  "author": "Jeswin<jeswinpk@agilehead.com>",
+  "scripts": {
+    "test": "mocha dist/test/test.js"
+  },
+  "dependencies": {
+    "babel-core": "^6.18.2",
+    "babel-plugin-transform-async-to-generator": "^6.16.0",
+    "babel-preset-node6": "^11.0.0",
+    "babel-preset-stage-3": "^6.17.0"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  }
+}
