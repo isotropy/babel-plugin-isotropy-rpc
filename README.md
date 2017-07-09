@@ -1,5 +1,7 @@
-Isotropy RPC Transpiler
-===============================
+WORK-IN-PROGRESS: Isotropy RPC Transpiler
+=========================================
+
+Do not use this yet.
 
 The RPC transpiler converts configured methods into HTTP method calls.
 The HTTP methods are exposed via the Isotropy calling convention, which is documented below. It's really cool, read on.
