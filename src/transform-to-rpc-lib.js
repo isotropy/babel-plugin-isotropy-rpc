@@ -3,7 +3,7 @@ import * as mapper from "./mappers";
 import * as template from "./templates";
 import * as t from "babel-types";
 import clean from "./utils/node-cleaner";
-import stackCollection from "./utils/stack-collection"
+import stackCollection from "./utils/stack-collection";
 
 export default function(opts) {
   let _analysis,
@@ -45,30 +45,32 @@ export default function(opts) {
           path.skip;
         },
 
-        AssignmentExpression(path, state) {
-          analyze(analyzers.write.analyzeAssignmentExpression, path, state);
-          if (!_analysisState) return;
-          path.replaceWith(
-            t.awaitExpression(
-              template[_analysis.type]()(
-                mapper[_analysis.type](
-                  clean(_analysis),
-                  libRpcIdentifier,
-                  basePath
-                )
-              ).expression
-            )
-          );
-        },
+        // AssignmentExpression(path, state) {
+        //   analyze(analyzers.write.analyzeAssignmentExpression, path, state);
+        //   if (!_analysisState) return;
+        //   path.replaceWith(
+        //     t.awaitExpression(
+        //       template[_analysis.type]()(
+        //         mapper[_analysis.type](
+        //           clean(_analysis),
+        //           libRpcIdentifier,
+        //           basePath
+        //         )
+        //       ).expression
+        //     )
+        //   );
+        // },
 
         CallExpression(path, state) {
           analyze(analyzers.read.analyzeCallExpression, path, state);
           if (!_analysisState) return;
+          const { resource, data } = stackCollection(clean(_analysis));
           path.replaceWith(
             t.awaitExpression(
               template[_analysis.type]()(
                 mapper[_analysis.type](
-                  clean(_analysis),
+                  resource,
+                  data,
                   libRpcIdentifier,
                   basePath
                 )
