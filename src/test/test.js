@@ -27,6 +27,7 @@ describe("isotropy-ast-analyzer-rpc", () => {
           [
             pluginInfo.plugin,
             {
+              libRpcIdentifier: "ispyRpc",
               rpcModules: {
                 todosServerModule: "./dist/test/fixtures/my-server"
               }
@@ -46,12 +47,13 @@ describe("isotropy-ast-analyzer-rpc", () => {
   }
 
   const tests = [
-    ["rpc", "rpc"]
-    // ,["rpc-args", "rpc-args"],
-    // ["rpc-deep", "rpc-deep"]
+    ["rpc", "rpc"],
+    ["rpc-args", "rpc-args"],
+    ["rpc-deep", "rpc-deep"]
   ];
 
   for (const test of tests) {
+    debugger;
     run(test);
   }
 });

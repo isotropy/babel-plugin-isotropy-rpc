@@ -3,9 +3,10 @@ import * as mapper from "./mappers";
 import * as template from "./templates";
 import * as t from "babel-types";
 import clean from "./utils/node-cleaner";
-import stackCollection from "./utils/stack-collection";
+import pathFinder from "./utils/path-finder";
 
 export default function(opts) {
+  debugger;
   let _analysis,
     _analysisState,
     _importAnalysis = false;
@@ -24,7 +25,7 @@ export default function(opts) {
   let analyzers;
   const libRpcIdentifier = t.identifier("ispyRpc");
   const libRpcSource = t.StringLiteral("isotropy-lib-rpc");
-  const basePath = t.stringLiteral("https://www.poe3.com");
+  const baseUrl = "https://www.poe3.com/";
 
   return {
     plugin: {
@@ -35,12 +36,12 @@ export default function(opts) {
         ImportDeclaration(path, state) {
           analyze(analyzers.meta.analyzeImportDeclaration, path, state);
           if (_importAnalysis) return;
-          path.insertBefore([
+          path.replaceWith(
             t.importDeclaration(
               [t.importDefaultSpecifier(libRpcIdentifier)],
               libRpcSource
             )
-          ]);
+          );
           _importAnalysis = true;
           path.skip;
         },
@@ -62,20 +63,13 @@ export default function(opts) {
         // },
 
         CallExpression(path, state) {
-          analyze(analyzers.read.analyzeCallExpression, path, state);
+          analyze(analyzers.analyze.analyzeCallExpression, path, state);
           if (!_analysisState) return;
-          const { resource, data } = stackCollection(clean(_analysis));
+          const { resource, data } = pathFinder(clean(_analysis), baseUrl);
           path.replaceWith(
-            t.awaitExpression(
-              template[_analysis.type]()(
-                mapper[_analysis.type](
-                  resource,
-                  data,
-                  libRpcIdentifier,
-                  basePath
-                )
-              ).expression
-            )
+            template[_analysis.type]()(
+              mapper[_analysis.type](resource, data, libRpcIdentifier)
+            ).expression
           );
         }
       }
