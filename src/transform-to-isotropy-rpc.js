@@ -7,19 +7,13 @@ import pathFinder from "./utils/path-finder";
 
 export default function(opts) {
   debugger;
-  let _analysis,
-    _analysisState,
-    _importAnalysis = false;
+  let _analysis;
 
   function analyze(fn, path, state) {
-    _analysisState = false;
     const analysis = fn(path, state);
-    path.skip();
     if (analysis !== undefined) {
       _analysis = analysis.value;
-      _analysisState = true;
     }
-    if (analysis === true) _analysisState = true;
   }
 
   let analyzers;
@@ -33,17 +27,21 @@ export default function(opts) {
         analyzers = getAnalyzers();
       },
       visitor: {
-        ImportDeclaration(path, state) {
-          analyze(analyzers.meta.analyzeImportDeclaration, path, state);
-          if (_importAnalysis) return;
-          path.replaceWith(
-            t.importDeclaration(
-              [t.importDefaultSpecifier(libRpcIdentifier)],
-              libRpcSource
-            )
-          );
-          _importAnalysis = true;
-          path.skip;
+        ImportDeclaration: {
+          exit(path, state) {
+            const analysis = analyzers.meta.analyzeImportDeclaration(
+              path,
+              state
+            );
+            if (!analysis) return;
+            path.replaceWith(
+              t.importDeclaration(
+                [t.importDefaultSpecifier(libRpcIdentifier)],
+                libRpcSource
+              )
+            );
+            path.skip();
+          }
         },
 
         // AssignmentExpression(path, state) {
@@ -62,15 +60,22 @@ export default function(opts) {
         //   );
         // },
 
-        CallExpression(path, state) {
-          analyze(analyzers.analyze.analyzeCallExpression, path, state);
-          if (!_analysisState) return;
-          const { resource, data } = pathFinder(clean(_analysis), baseUrl);
-          path.replaceWith(
-            template[_analysis.type]()(
-              mapper[_analysis.type](resource, data, libRpcIdentifier)
-            ).expression
-          );
+        CallExpression: {
+          exit(path, state) {
+            // analyze(analyzers.analyze.analyzeCallExpression, path, state);
+            const analysis = analyzers.analyze.analyzeCallExpression(
+              path,
+              state
+            ).value;
+            if (!analysis) return;
+            const { resource, data } = pathFinder(clean(analysis), baseUrl);
+            path.replaceWith(
+              template[analysis.type]()(
+                mapper[analysis.type](resource, data, libRpcIdentifier)
+              ).expression
+            );
+            path.skip();
+          }
         }
       }
     }

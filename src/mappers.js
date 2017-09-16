@@ -1,6 +1,6 @@
 import * as t from "babel-types";
 
-export function rpc_post(resource, data, libRpc) {
+export function post(resource, data, libRpc) {
   return {
     RESOURCE: resource,
     DATA: data,

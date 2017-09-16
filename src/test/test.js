@@ -2,7 +2,7 @@ import should from "should";
 import * as babel from "babel-core";
 import fs from "fs";
 import path from "path";
-import makePlugin from "../transform-to-rpc-lib";
+import makePlugin from "../transform-to-isotropy-rpc";
 import sourceMapSupport from "source-map-support";
 
 sourceMapSupport.install();
