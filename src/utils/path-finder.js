@@ -15,16 +15,3 @@ export default function(cleanalysis, baseUrl) {
       );
   return { resource, data };
 }
-
-// const resource = cleanalysis.collection
-//   ? t.memberExpression(
-//       t.identifier(cleanalysis.collection),
-//       t.identifier(cleanalysis.function)
-//     )
-//   : cleanalysis.collectionArray.reduce(
-//       (acc, cur, index) =>
-//         index === 0
-//           ? t.identifier(cur)
-//           : t.memberExpression(acc, t.identifier(cur)),
-//       {}
-//     );

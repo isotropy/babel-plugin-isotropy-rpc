@@ -29,8 +29,13 @@ describe("isotropy-ast-analyzer-rpc", () => {
             {
               projects: [
                 {
-                  dir: "dist/test",
-                  modules: [{ source: "fixtures", url: "https://www.poe3.com" }]
+                  dir: "dist/test/fixtures",
+                  modules: [
+                    {
+                      source: "my-server",
+                      url: "https://www.poe3.com"
+                    }
+                  ]
                 }
               ]
             }

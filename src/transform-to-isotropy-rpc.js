@@ -35,25 +35,8 @@ export default function(opts) {
           }
         },
 
-        // AssignmentExpression(path, state) {
-        //   analyze(analyzers.write.analyzeAssignmentExpression, path, state);
-        //   if (!_analysisState) return;
-        //   path.replaceWith(
-        //     t.awaitExpression(
-        //       template[_analysis.type]()(
-        //         mapper[_analysis.type](
-        //           clean(_analysis),
-        //           libRpcIdentifier,
-        //           basePath
-        //         )
-        //       ).expression
-        //     )
-        //   );
-        // },
-
         CallExpression: {
           exit(path, state) {
-            // analyze(analyzers.analyze.analyzeCallExpression, path, state);
             const analysis = analyzers.analyze.analyzeCallExpression(
               path,
               state
