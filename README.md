@@ -1,4 +1,4 @@
-#Isotropy Babel Plugin for RPC
+Isotropy Babel Plugin for RPC
 =============================
 This module is a babel plugin that transpiles function calls from the designated
 server module(s) into corresponding server calls.
@@ -7,7 +7,7 @@ It uses isotropy-ast-analyzer-rpc for AST analysis.
 
 This is part of the isotropy framework (www.isotropy.org).
 
-##Usage
+Usage
 ======
 Create a module "server.js" containing a set of exported function that mock the server.
 The filename can be changed in configuration.
@@ -28,10 +28,10 @@ async function getAllTodos() {
 
 ```
 
-##Configuration
+Configuration
 ==============
 In .babelrc include
-'''
+```
 plugins: ["transform-to-isotropy-rpc",
   {
     projects:
@@ -43,6 +43,6 @@ plugins: ["transform-to-isotropy-rpc",
       ]
   }
 ]
-'''
+```
 Specify the filesystem directory in which your project lies and include the
 module's path and the url it translates to.
