@@ -27,10 +27,12 @@ describe("isotropy-ast-analyzer-rpc", () => {
           [
             pluginInfo.plugin,
             {
-              libRpcIdentifier: "ispyRpc",
-              rpcModules: {
-                todosServerModule: "./dist/test/fixtures/my-server"
-              }
+              projects: [
+                {
+                  dir: "dist/test",
+                  modules: [{ source: "fixtures", url: "https://www.poe3.com" }]
+                }
+              ]
             }
           ],
           "transform-object-rest-spread"

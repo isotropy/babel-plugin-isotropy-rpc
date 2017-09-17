@@ -6,20 +6,11 @@ import clean from "./utils/node-cleaner";
 import pathFinder from "./utils/path-finder";
 
 export default function(opts) {
-  debugger;
-  let _analysis;
-
-  function analyze(fn, path, state) {
-    const analysis = fn(path, state);
-    if (analysis !== undefined) {
-      _analysis = analysis.value;
-    }
-  }
-
   let analyzers;
-  const libRpcIdentifier = t.identifier("ispyRpc");
+  const libRpcIdentifier = t.identifier(
+    "isotropyRPC_" + Math.random().toString(36).substring(2)
+  );
   const libRpcSource = t.StringLiteral("isotropy-lib-rpc");
-  const baseUrl = "https://www.poe3.com/";
 
   return {
     plugin: {
@@ -68,7 +59,10 @@ export default function(opts) {
               state
             ).value;
             if (!analysis) return;
-            const { resource, data } = pathFinder(clean(analysis), baseUrl);
+            const { resource, data } = pathFinder(
+              clean(analysis),
+              analysis.module
+            );
             path.replaceWith(
               template[analysis.type]()(
                 mapper[analysis.type](resource, data, libRpcIdentifier)
