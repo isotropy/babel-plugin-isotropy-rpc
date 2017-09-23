@@ -7,7 +7,7 @@
     "Jeswin Kumar<jeswinpk@agilehead.com>",
     "Arivanandan<uarivanandan@gmail.com>"
   ],
-  "main": "dist/plugin-rpc.js",
+  "main": "dist/transform-to-isotropy-rpc.js",
   "scripts": {
     "test": "mocha dist/test/test.js",
     "debug": "mocha --inspect-brk dist/test/test.js"
@@ -20,7 +20,7 @@
     "url": "https://github.com/isotropy/babel-plugin-isotropy-rpc/issues"
   },
   "dependencies": {
-    "isotropy-ast-analyzer-rpc": "0.0.1"
+    "isotropy-ast-analyzer-rpc": "*"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",

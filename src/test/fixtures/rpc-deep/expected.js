@@ -1,6 +1,6 @@
-import ispyRpc from "isotropy-lib-rpc";
+import _isotropyRpc from "isotropy-lib-rpc";
 
 
 async function getAllDones() {
-  return await ispyRpc.post("https://www.poe3.com/legacyServer.backUpLogs.postsAPI.getAllDones");
+  return await _isotropyRpc.post("https://www.poe3.com/legacyServer.backUpLogs.postsAPI.getAllDones");
 }

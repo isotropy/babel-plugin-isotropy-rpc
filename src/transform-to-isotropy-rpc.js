@@ -7,9 +7,7 @@ import pathFinder from "./utils/path-finder";
 
 export default function(opts) {
   let analyzers;
-  const libRpcIdentifier = t.identifier(
-    "isotropyRPC_" + Math.random().toString(36).substring(2)
-  );
+  let libRpcIdentifier;
   const libRpcSource = t.StringLiteral("isotropy-lib-rpc");
 
   return {
@@ -25,6 +23,9 @@ export default function(opts) {
               state
             );
             if (!analysis) return;
+            libRpcIdentifier = t.identifier(
+              path.scope.generateUidIdentifier("isotropyRpc").name
+            );
             path.replaceWith(
               t.importDeclaration(
                 [t.importDefaultSpecifier(libRpcIdentifier)],
