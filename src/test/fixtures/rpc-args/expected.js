@@ -1,4 +1,4 @@
-import _isotropyRpc from "isotropy-lib-rpc";
+import _isotropyRpc from "isotropy-lib-webservices";
 
 
 async function getTodosOf(id = "0x8902") {

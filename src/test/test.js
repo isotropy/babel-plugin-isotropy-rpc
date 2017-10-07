@@ -7,7 +7,7 @@ import sourceMapSupport from "source-map-support";
 
 sourceMapSupport.install();
 
-describe("isotropy-ast-analyzer-rpc", () => {
+describe("isotropy-ast-analyzer-webservices", () => {
   function run([description, dir, opts]) {
     it(`${description}`, () => {
       const fixturePath = path.resolve(

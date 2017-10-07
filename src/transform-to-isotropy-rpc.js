@@ -1,4 +1,4 @@
-import getAnalyzers from "../../isotropy-ast-analyzer-rpc/dist";
+import getAnalyzers from "../../isotropy-ast-analyzer-webservices/dist";
 import * as mapper from "./mappers";
 import * as template from "./templates";
 import * as t from "babel-types";
@@ -8,7 +8,7 @@ import pathFinder from "./utils/path-finder";
 export default function(opts) {
   let analyzers;
   let libRpcIdentifier;
-  const libRpcSource = t.StringLiteral("isotropy-lib-rpc");
+  const libRpcSource = t.StringLiteral("isotropy-lib-webservices");
 
   return {
     plugin: {

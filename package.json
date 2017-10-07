@@ -1,11 +1,11 @@
 {
-  "name": "babel-plugin-isotropy-rpc",
-  "description": "Babel plugin for transpiling to isotropy-lib-rpc",
+  "name": "babel-plugin-isotropy-webservices",
+  "description": "Babel plugin for transpiling to isotropy-lib-webservices",
   "version": "0.0.1",
-  "author": "Arivanandan<uarivanandan@gmail.com>",
+  "author": "Isotropy Team<isotropy@agilehead.com>",
   "contributors": [
-    "Jeswin Kumar<jeswinpk@agilehead.com>",
-    "Arivanandan<uarivanandan@gmail.com>"
+    "Arivanandan<uarivanandan@gmail.com>",
+    "Jeswin Kumar<jeswinpk@agilehead.com>"
   ],
   "main": "dist/transform-to-isotropy-rpc.js",
   "scripts": {
@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/isotropy/babel-plugin-isotropy-rpc.git"
+    "url": "https://github.com/isotropy/babel-plugin-isotropy-webservices.git"
   },
   "bugs": {
-    "url": "https://github.com/isotropy/babel-plugin-isotropy-rpc/issues"
+    "url": "https://github.com/isotropy/babel-plugin-isotropy-webservices/issues"
   },
   "dependencies": {
-    "isotropy-ast-analyzer-rpc": "*"
+    "isotropy-ast-analyzer-webservices": "*"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",

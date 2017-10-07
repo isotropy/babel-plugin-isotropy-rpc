@@ -738,9 +738,9 @@ is-finite@^1.0.0:
   dependencies:
     number-is-nan "^1.0.0"
 
-isotropy-ast-analyzer-rpc@*:
+isotropy-ast-analyzer-webservices@*:
   version "0.0.1"
-  resolved "https://registry.yarnpkg.com/isotropy-ast-analyzer-rpc/-/isotropy-ast-analyzer-rpc-0.0.1.tgz#fd079f5ae86eb911e458629f3f51bd17e10d8986"
+  resolved "https://registry.yarnpkg.com/isotropy-ast-analyzer-webservices/-/isotropy-ast-analyzer-webservices-0.0.1.tgz#fd079f5ae86eb911e458629f3f51bd17e10d8986"
   dependencies:
     ast-crumbs "0.0.2"
     chimpanzee "0.0.50"
