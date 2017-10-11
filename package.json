@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-isotropy-webservices",
   "description": "Babel plugin for transpiling to isotropy-lib-webservices",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Isotropy Team<isotropy@agilehead.com>",
   "contributors": [
     "Arivanandan<uarivanandan@gmail.com>",
