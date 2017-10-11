@@ -10,12 +10,6 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
-ast-crumbs@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/ast-crumbs/-/ast-crumbs-0.0.2.tgz#49bd0b54fa17ef829e5acf5a6d3d67bbb945f4ff"
-  dependencies:
-    immutable "^3.8.1"
-
 babel-code-frame@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -711,10 +705,6 @@ home-or-tmp@^2.0.0:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.1"
 
-immutable@^3.8.1:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
-
 inflight@^1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
@@ -738,11 +728,10 @@ is-finite@^1.0.0:
   dependencies:
     number-is-nan "^1.0.0"
 
-isotropy-ast-analyzer-webservices@*:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/isotropy-ast-analyzer-webservices/-/isotropy-ast-analyzer-webservices-0.0.1.tgz#fd079f5ae86eb911e458629f3f51bd17e10d8986"
+isotropy-ast-analyzer-webservices@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/isotropy-ast-analyzer-webservices/-/isotropy-ast-analyzer-webservices-0.0.2.tgz#5a981c27904749665511c84a54511281eff68c46"
   dependencies:
-    ast-crumbs "0.0.2"
     chimpanzee "0.0.50"
     lazily "^0.0.17"
     ramda "^0.23.0"
