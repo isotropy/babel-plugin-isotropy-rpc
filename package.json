@@ -20,7 +20,7 @@
     "url": "https://github.com/isotropy/babel-plugin-isotropy-webservices/issues"
   },
   "dependencies": {
-    "isotropy-ast-analyzer-webservices": "^0.0.2"
+    "isotropy-ast-analyzer-webservices": "^0.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",

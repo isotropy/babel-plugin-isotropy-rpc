@@ -19,7 +19,7 @@ describe("isotropy-ast-analyzer-webservices", () => {
                 dir: "dist/test/fixtures",
                 modules: [
                   {
-                    source: "my-server",
+                    source: "dist/test/fixtures/my-server",
                     url: "https://www.poe3.com"
                   }
                 ]

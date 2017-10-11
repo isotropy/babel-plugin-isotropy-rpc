@@ -728,9 +728,9 @@ is-finite@^1.0.0:
   dependencies:
     number-is-nan "^1.0.0"
 
-isotropy-ast-analyzer-webservices@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/isotropy-ast-analyzer-webservices/-/isotropy-ast-analyzer-webservices-0.0.2.tgz#5a981c27904749665511c84a54511281eff68c46"
+isotropy-ast-analyzer-webservices@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/isotropy-ast-analyzer-webservices/-/isotropy-ast-analyzer-webservices-0.0.3.tgz#d3a394510999871d39675e78c0bbd5bb763dba60"
   dependencies:
     chimpanzee "0.0.50"
     lazily "^0.0.17"
