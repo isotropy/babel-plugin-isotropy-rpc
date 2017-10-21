@@ -1,9 +1,9 @@
-import getAnalyzers from "isotropy-ast-analyzer-webservices";
+import getAnalyzers from "../../isotropy-ast-analyzer-webservices";
 import * as mapper from "./mappers";
 import * as template from "./templates";
 import * as t from "babel-types";
 import clean from "./utils/node-cleaner";
-import pathFinder from "./utils/path-finder";
+import collator from "./utils/collator";
 
 export default function() {
   let analyzers = getAnalyzers();
@@ -34,10 +34,13 @@ export default function() {
       const analysis = analyzers.analyze.analyzeCallExpression(path, state)
         .value;
       if (!analysis) return;
-      const { resource, data } = pathFinder(clean(analysis), analysis.module);
+      const { resource, data } = collator(
+        clean(analysis),
+        analysis.module.remoteUrl
+      );
       path.replaceWith(
-        template[analysis.type]()(
-          mapper[analysis.type](resource, data, libRpcIdentifier)
+        template[analysis.httpMethod]()(
+          mapper[analysis.httpMethod](resource, data, libRpcIdentifier)
         ).expression
       );
       path.skip();

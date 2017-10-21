@@ -20,7 +20,11 @@ describe("isotropy-ast-analyzer-webservices", () => {
                 modules: [
                   {
                     source: "dist/test/fixtures/my-server",
-                    url: "https://www.poe3.com"
+                    remoteUrl: "http://www.poe3.com",
+                    httpMethods: {
+                      get: ["$get"],
+                      post: ["$post"]
+                    }
                   }
                 ]
               }
