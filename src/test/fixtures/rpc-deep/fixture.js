@@ -1,5 +1,6 @@
 import * as myServer from "../my-server";
 
 async function getAllDones() {
-  return await myServer.legacyServer.backUpLogs.postsAPI.getAllDones();
+  const a = 1;
+  return await myServer.legacyServer.backUpLogs(a, 2).postsAPI.getAllDones();
 }

@@ -1,21 +1,63 @@
 import * as t from "babel-types";
+import generate from "babel-generator";
 
-export default function(cleanalysis, remoteUrl) {
-  const data = cleanalysis.args
-    ? cleanalysis.expressions.find(expr => (expr.arguments ? true : false))
-        .arguments
-    : null;
-
+export default function(path, cleanalysis, remoteUrl) {
   remoteUrl = remoteUrl.endsWith("/") ? remoteUrl : remoteUrl + "/";
 
-  const resource = t.stringLiteral(
-    remoteUrl +
-      cleanalysis.expressions
-        .reduce(
-          (acc, cur) => (cur.memberName ? acc + "." + cur.memberName : acc),
-          ""
-        )
-        .substring(1)
+  const analyzeArgs = argArray =>
+    argArray.reduce(
+      (acc, cur) => {
+        console.log(cur);
+        return cur.type === "BooleanLiteral" ||
+          cur.type === "NumericLiteral" ||
+          (cur.type === "StringLiteral" && !cur.value.includes(" "))
+          ? {
+              simpleArgs: acc.simpleArgs + ", " + generate(cur).code,
+              complexArgs: acc.complexArgs
+            }
+          : (() => {
+              const argIdentifier = path.scope.generateUidIdentifier("arg")
+                .name;
+              return {
+                simpleArgs: acc.simpleArgs + ", " + argIdentifier,
+                complexArgs: acc.complexArgs.concat({
+                  [argIdentifier]: generate(cur).code
+                })
+              };
+            })();
+      },
+      { simpleArgs: "", complexArgs: [] }
+    );
+
+  const { remoteResource, args } = cleanalysis.expressions.reduce(
+    (acc, cur, i) =>
+      cur.type === "MemberExpression"
+        ? cleanalysis.expressions[i + 1] &&
+            "CallExpression" === cleanalysis.expressions[i + 1].type
+          ? (() => {
+              const { simpleArgs, complexArgs } = analyzeArgs(
+                cleanalysis.expressions[i + 1].arguments
+              );
+              return {
+                remoteResource:
+                  acc.remoteResource +
+                    "." +
+                    cur.memberName +
+                    `(${simpleArgs.substring(2)})`,
+                args: acc.args.concat(complexArgs)
+              };
+            })()
+          : {
+              remoteResource: acc.remoteResource + "." + cur.memberName,
+              args: acc.args
+            }
+        : { remoteResource: acc.remoteResource, args: acc.args },
+    { remoteResource: "", args: [] }
   );
-  return { resource, data };
+
+  console.log(t.stringLiteral(remoteUrl + remoteResource.substring(1)), args);
+  return {
+    resource: t.stringLiteral(remoteUrl + remoteResource.substring(1)),
+    data: args
+  };
 }

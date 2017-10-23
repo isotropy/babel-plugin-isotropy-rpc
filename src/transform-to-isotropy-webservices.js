@@ -29,22 +29,20 @@ export default function() {
     }
   };
 
-  visitor.CallExpression = {
-    exit(path, state) {
-      const analysis = analyzers.analyze.analyzeCallExpression(path, state)
-        .value;
-      if (!analysis) return;
-      const { resource, data } = collator(
-        clean(analysis),
-        analysis.module.remoteUrl
-      );
-      path.replaceWith(
-        template[analysis.httpMethod]()(
-          mapper[analysis.httpMethod](resource, data, libRpcIdentifier)
-        ).expression
-      );
-      path.skip();
-    }
+  visitor.CallExpression = function(path, state) {
+    const analysis = analyzers.analyze.analyzeCallExpression(path, state).value;
+    if (!analysis) return;
+    const { resource, data } = collator(
+      path,
+      clean(analysis),
+      analysis.remoteUrl
+    );
+    path.replaceWith(
+      template[analysis.httpMethod]()(
+        mapper[analysis.httpMethod](resource, data, libRpcIdentifier)
+      ).expression
+    );
+    path.skip();
   };
 
   return { visitor };
