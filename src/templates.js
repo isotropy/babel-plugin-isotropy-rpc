@@ -1,9 +1,12 @@
 import template from "babel-template";
 
-export function post() {
-  return template(`LIB_RPC.post(RESOURCE, DATA);`);
+function templateConstructor(method) {
+  return template(`LIB_Ws.${method}(RESOURCE, DATA);`);
 }
 
-export function get() {
-  return template(`LIB_RPC.get(RESOURCE, DATA);`);
-}
+export default {
+  get: () => templateConstructor("get"),
+  post: () => templateConstructor("post"),
+  put: () => templateConstructor("put"),
+  delete: () => templateConstructor("delete")
+};

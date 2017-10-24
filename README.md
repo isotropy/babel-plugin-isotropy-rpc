@@ -1,4 +1,4 @@
-Isotropy Babel Plugin for RPC
+Isotropy Babel Plugin for Ws
 =============================
 This module is a babel plugin that transpiles function calls from the designated
 server module(s) into corresponding server calls.
@@ -18,7 +18,7 @@ export function getAllTodos() {
 }
 ```
 
-Perform a RPC
+Perform a Ws
 ```javascript
 import * as myServer from "../my-server";
 
@@ -32,7 +32,7 @@ Configuration
 ==============
 In .babelrc include
 ```
-plugins: ["transform-to-isotropy-rpc",
+plugins: ["transform-to-isotropy-Ws",
   {
     projects:
       [

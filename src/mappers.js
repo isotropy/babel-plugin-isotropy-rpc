@@ -1,17 +1,16 @@
 import * as t from "babel-types";
 
-export function post(resource, data, libRpc) {
+function mapper(resource, data, libWS) {
   return {
     RESOURCE: resource,
     DATA: data,
-    LIB_RPC: libRpc
+    LIB_Ws: libWS
   };
 }
 
-export function get(resource, data, libRpc) {
-  return {
-    RESOURCE: resource,
-    DATA: data,
-    LIB_RPC: libRpc
-  };
-}
+export default {
+  get: (resource, data, libWS) => mapper(resource, data, libWS),
+  post: (resource, data, libWS) => mapper(resource, data, libWS),
+  put: (resource, data, libWS) => mapper(resource, data, libWS),
+  delete: (resource, data, libWS) => mapper(resource, data, libWS)
+};

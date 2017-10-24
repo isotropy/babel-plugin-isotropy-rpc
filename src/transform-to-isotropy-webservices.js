@@ -1,6 +1,6 @@
 import getAnalyzers from "isotropy-ast-analyzer-webservices";
-import * as mapper from "./mappers";
-import * as template from "./templates";
+import mapper from "./mappers";
+import template from "./templates";
 import * as t from "babel-types";
 import * as babel from "babel-core";
 import clean from "./utils/node-cleaner";
@@ -8,8 +8,8 @@ import collator from "./utils/collator";
 
 export default function() {
   let analyzers = getAnalyzers();
-  let libRpcIdentifier;
-  const libRpcSource = t.StringLiteral("isotropy-lib-webservices");
+  let libWsIdentifier;
+  const libWsSource = t.StringLiteral("isotropy-lib-webservices");
 
   const visitor = {};
 
@@ -17,13 +17,13 @@ export default function() {
     exit(path, state) {
       const analysis = analyzers.meta.analyzeImportDeclaration(path, state);
       if (!analysis) return;
-      libRpcIdentifier = t.identifier(
-        path.scope.generateUidIdentifier("isotropyRpc").name
+      libWsIdentifier = t.identifier(
+        path.scope.generateUidIdentifier("isotropyWs").name
       );
       path.replaceWith(
         t.importDeclaration(
-          [t.importDefaultSpecifier(libRpcIdentifier)],
-          libRpcSource
+          [t.importDefaultSpecifier(libWsIdentifier)],
+          libWsSource
         )
       );
       path.skip();
@@ -42,7 +42,7 @@ export default function() {
     dataAST = dataAST.expression.elements.length > 0 ? dataAST : null;
     path.replaceWith(
       template[analysis.httpMethod]()(
-        mapper[analysis.httpMethod](resource, dataAST, libRpcIdentifier)
+        mapper[analysis.httpMethod](resource, dataAST, libWsIdentifier)
       ).expression
     );
     path.stop();
