@@ -6,26 +6,29 @@ export default function(path, cleanalysis, remoteUrl) {
 
   const analyzeArgs = argArray =>
     argArray.reduce(
-      (acc, cur) => {
-        console.log(cur);
-        return cur.type === "BooleanLiteral" ||
+      (acc, cur) =>
+        cur.type === "BooleanLiteral" ||
           cur.type === "NumericLiteral" ||
           (cur.type === "StringLiteral" && !cur.value.includes(" "))
           ? {
               simpleArgs: acc.simpleArgs + ", " + generate(cur).code,
               complexArgs: acc.complexArgs
             }
-          : (() => {
-              const argIdentifier = path.scope.generateUidIdentifier("arg")
-                .name;
-              return {
-                simpleArgs: acc.simpleArgs + ", " + argIdentifier,
-                complexArgs: acc.complexArgs.concat({
-                  [argIdentifier]: generate(cur).code
-                })
-              };
-            })();
-      },
+          : cur.type === "Identifier"
+            ? {
+                simpleArgs: acc.simpleArgs + ", " + generate(cur).code,
+                complexArgs: acc.complexArgs
+              }
+            : (() => {
+                const argIdentifier = path.scope.generateUidIdentifier("arg")
+                  .name;
+                return {
+                  simpleArgs: acc.simpleArgs + ", " + argIdentifier,
+                  complexArgs: acc.complexArgs.concat({
+                    [argIdentifier]: generate(cur).code
+                  })
+                };
+              })(),
       { simpleArgs: "", complexArgs: [] }
     );
 
@@ -55,7 +58,6 @@ export default function(path, cleanalysis, remoteUrl) {
     { remoteResource: "", args: [] }
   );
 
-  console.log(t.stringLiteral(remoteUrl + remoteResource.substring(1)), args);
   return {
     resource: t.stringLiteral(remoteUrl + remoteResource.substring(1)),
     data: args

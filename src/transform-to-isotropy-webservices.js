@@ -2,6 +2,7 @@ import getAnalyzers from "../../isotropy-ast-analyzer-webservices";
 import * as mapper from "./mappers";
 import * as template from "./templates";
 import * as t from "babel-types";
+import * as babel from "babel-core";
 import clean from "./utils/node-cleaner";
 import collator from "./utils/collator";
 
@@ -37,12 +38,14 @@ export default function() {
       clean(analysis),
       analysis.remoteUrl
     );
+    let dataAST = babel.transform(JSON.stringify(data)).ast.program.body[0];
+    dataAST = dataAST.expression.elements.length > 0 ? dataAST : null;
     path.replaceWith(
       template[analysis.httpMethod]()(
-        mapper[analysis.httpMethod](resource, data, libRpcIdentifier)
+        mapper[analysis.httpMethod](resource, dataAST, libRpcIdentifier)
       ).expression
     );
-    path.skip();
+    path.stop();
   };
 
   return { visitor };

@@ -57,8 +57,9 @@ describe("isotropy-ast-analyzer-webservices", () => {
   }
 
   [
-    // ["rpc", "rpc"],
-    // ["rpc-args", "rpc-args"],
+    ["rpc", "rpc"],
+    ["rpc-args", "rpc-args"],
+    ["rpc-complex-args", "rpc-complex-args"],
     ["rpc-deep", "rpc-deep"]
   ].forEach(test => run(test));
 });
