@@ -1,4 +1,4 @@
-import getAnalyzers from "../../isotropy-ast-analyzer-webservices";
+import getAnalyzers from "isotropy-ast-analyzer-webservices";
 import * as mapper from "./mappers";
 import * as template from "./templates";
 import * as t from "babel-types";
