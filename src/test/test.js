@@ -58,8 +58,12 @@ describe("isotropy-ast-analyzer-webservices", () => {
 
   [
     ["ws", "ws"],
+    ["ws-call-missing-methods", "ws-call-missing-methods"],
     ["ws-args", "ws-args"],
+    ["ws-simple-args", "ws-simple-args"],
     ["ws-complex-args", "ws-complex-args"],
-    ["ws-deep", "ws-deep"]
+    ["ws-deep", "ws-deep"],
+    ["ws-default-method", "ws-default-method"],
+    ["ws-get", "ws-get"]
   ].forEach(test => run(test));
 });
